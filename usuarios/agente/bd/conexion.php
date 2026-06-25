@@ -1,0 +1,26 @@
+<?php
+class Conexion {
+    public static function Conectar() {
+        define('servidor','localhost');
+        define('nombre_bd','jldesarr_gestion_calidad');
+        define('usuario','jldesarr_sistema');
+        define('password','SecretariaMovilidad2025*');
+
+        $opciones = array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+        );
+
+        try {
+
+            $conexion = new PDO("mysql:host=" . servidor . ";dbname=" . nombre_bd . ";charset=utf8", usuario, password, $opciones);
+
+
+            $conexion->exec("SET NAMES 'utf8'");
+
+            return $conexion;
+        } catch (Exception $e) {
+            die("El error de Conexi¨®n es :" . $e->getMessage());
+        }
+    }
+}
+?>
