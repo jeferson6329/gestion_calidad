@@ -1,254 +1,175 @@
 # 📋 Sistema de Gestión de Calidad
 
-## 📌 Descripción General
+Un sistema integral de gestión y control de calidad que automatiza el monitoreo, evaluación y validación de procesos organizacionales. Implementa un flujo de trabajo colaborativo con roles especializados para garantizar calidad en toda la organización.
 
-Sistema integral de gestión y control de calidad diseñado para monitorear, evaluar y validar procesos de calidad en la organización. El sistema implementa un flujo de trabajo estructurado con múltiples roles, estados condicionales y niveles de aprobación.
+**Versión**: 1.0.0  
+**Última actualización**: 2026-07-03
 
 ---
 
-## 🎯 Funcionalidades Principales
+## 🎯 Características Principales
 
 ### 1. **Monitoreo de Calidad**
-- El **Líder de Calidad** realiza monitoreo continuo de procesos
-- Genera reportes de cumplimiento
-- Identifica desviaciones y no conformidades
-- Documenta hallazgos y observaciones
+El **Líder de Calidad** realiza evaluaciones continuas de procesos, documentando hallazgos, observaciones y adjuntando evidencia.
 
-### 2. **Evaluación y Refutación**
-- El **Asesor** revisa los monitoreos realizados
-- Puede **aceptar** los hallazgos (proceso finaliza)
-- Puede **refutar** los hallazgos (escala a supervisor)
+### 2. **Revisión y Evaluación**
+El **Asesor** revisa monitoreos y puede **aceptar** (finaliza el proceso) o **refutar** (con justificación documentada).
 
-### 3. **Validación por Supervisor**
-- El **Supervisor** recibe refutaciones del asesor
-- **Decide si procede** la refutación:
-  - ✅ **SÍ PROCEDE**: Escala al Líder de Calidad para validación final
-  - ❌ **NO PROCEDE**: Retorna al Asesor para replanteamiento
+### 3. **Validación de Refutaciones**
+El **Supervisor** evalúa refutaciones y decide si proceden:
+- ✅ **Procede**: Escala a Líder para validación final
+- ❌ **No Procede**: Retorna al Asesor para replanteamiento
 
 ### 4. **Validación Final**
-- El **Líder de Calidad** valida la decisión del supervisor
-- Emite validación final del proceso
-- Cierra o continúa el ciclo
+El **Líder de Calidad** realiza validación final, cierra procesos y genera certificados.
+
+### 5. **Reportes y Análisis**
+Generación de reportes por rol, estadísticas, análisis de tendencias y exportación de datos.
 
 ---
 
 ## 👥 Roles y Responsabilidades
 
-| Rol | Responsabilidades | Permisos |
-|-----|-------------------|---------|
-| **Líder de Calidad** | - Realizar monitoreos<br>- Evaluar procesos<br>- Validar decisiones del supervisor | Crear monitoreos, Validar decisiones, Ver reportes |
-| **Asesor** | - Revisar monitoreos<br>- Aceptar o refutar hallazgos<br>- Justificar refutaciones | Revisar monitoreos, Aceptar/Refutar, Comentar |
-| **Supervisor** | - Evaluar refutaciones<br>- Decidir si procede<br>- Derivar a líder si procede | Revisar refutaciones, Aprobar/Rechazar, Derivar |
-| **Administrador** | - Gestionar usuarios<br>- Configurar sistema<br>- Generar reportes globales | Acceso total, Gestionar roles |
+| Rol | Responsabilidades | Permisos Clave |
+|-----|-------------------|----------------|
+| **Líder de Calidad** | Crear monitoreos, evaluar procesos, validar decisiones | ✓ Crear monitoreos, Validar, Ver reportes |
+| **Asesor** | Revisar monitoreos, aceptar/refutar hallazgos | ✓ Revisar, Aceptar/Refutar, Comentar |
+| **Supervisor** | Evaluar refutaciones, decidir procedencia | ✓ Revisar refutaciones, Aprobar/Rechazar |
+| **Administrador** | Gestionar usuarios y configuración del sistema | ✓ Acceso total, Gestionar roles |
 
 ---
 
 ## 🔄 Flujo de Procesos
 
-### **Flujo Principal: Monitoreo → Refutación → Validación**
-
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    LÍDER DE CALIDAD                              │
-│                  Realiza Monitoreo                               │
-│            (Reporte de hallazgos y observaciones)               │
-└──────────────────────┬──────────────────────────────────────────┘
-                       │
-                       ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                         ASESOR                                   │
-│                    Revisa Monitoreo                              │
-└──────────────────────┬──────────────────────────────────────────┘
-                       │
-           ┌───────────┴───────────┐
-           │                       │
-        ACEPTA                 REFUTA
-           │                       │
-           │              (Justificación)
-           │                       │
-           ▼                       ▼
-      FINALIZA            ┌─────────────────┐
-      PROCESO             │    SUPERVISOR   │
-                          │  Revisa Refuta  │
-                          └────────┬────────┘
-                                   │
-                        ┌──────────┴──────────┐
-                        │                     │
-                   PROCEDE            NO PROCEDE
-                        │                     │
-                        │                     ▼
-                        │              Retorna a ASESOR
-                        │              (Replanteamiento)
+┌─────────────────────────────┐
+│  LÍDER DE CALIDAD           │
+│  Crea Monitoreo             │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│  ASESOR                     │
+│  Revisa Monitoreo           │
+└──────────────┬──────────────┘
+               │
+       ┌───────┴────────┐
+       │                │
+    ACEPTA           REFUTA
+       │                │
+       ▼                ▼
+    ✅ FIN      ┌────────────────┐
+               │   SUPERVISOR   │
+               │ Evalúa Refuta  │
+               └────────┬───────┘
                         │
-                        ▼
-                ┌──────────────────────┐
-                │ LÍDER DE CALIDAD     │
-                │ Validación Final     │
-                │ (Cierra o continúa)  │
-                └──────────────────────┘
+          ┌─────────────┴──────────────┐
+          │                            │
+      PROCEDE                   NO PROCEDE
+          │                            │
+          ▼                            ▼
+    ┌──────────────────┐      Retorna a ASESOR
+    │ LÍDER CALIDAD    │      (Replanteamiento)
+    │ Validación Final │
+    │ (✅ FIN o ↻)     │
+    └──────────────────┘
 ```
 
 ---
 
-## 🔐 Estados y Condiciones
-
-### **Estados de un Monitoreo**
+## 🔐 Estados de Monitoreo
 
 | Estado | Descripción | Siguiente Acción |
 |--------|-------------|-----------------|
-| **CREADO** | Monitoreo inicial realizado por líder | Enviar a Asesor |
+| **CREADO** | Monitoreo inicial creado por líder | Enviar a Asesor |
 | **EN_REVISIÓN_ASESOR** | Asesor evaluando hallazgos | Aceptar o Refutar |
-| **ACEPTADO** | Asesor acepta hallazgos | ✅ FIN DEL PROCESO |
+| **ACEPTADO** | Asesor acepta hallazgos | ✅ Proceso finalizado |
 | **REFUTADO** | Asesor refuta con justificación | Enviar a Supervisor |
 | **EN_REVISIÓN_SUPERVISOR** | Supervisor evaluando refutación | Aprobar o Rechazar |
-| **REFUTACIÓN_APROBADA** | Supervisor aprueba refutación | Enviar a Líder |
-| **REFUTACIÓN_RECHAZADA** | Supervisor rechaza refutación | Retornar a Asesor |
+| **REFUTACIÓN_APROBADA** | Supervisor aprueba | Enviar a Líder para validación |
+| **REFUTACIÓN_RECHAZADA** | Supervisor rechaza | Retornar a Asesor |
 | **EN_VALIDACIÓN_LÍDER** | Líder realizando validación final | Validar o Rechazar |
-| **VALIDADO** | Líder valida decisión | ✅ FIN DEL PROCESO |
-| **RECHAZADO** | Líder rechaza decisión | Retornar a Asesor |
-
-### **Reglas Condicionales**
-
-#### 1️⃣ **Asesor Acepta**
-```
-SI Asesor.acción = ACEPTAR
-ENTONCES
-  - Estado = ACEPTADO
-  - Fecha Finalización = HOY
-  - Notificar Líder (aceptación)
-  - FIN PROCESO ✅
-FIN SI
-```
-
-#### 2️⃣ **Asesor Refuta**
-```
-SI Asesor.acción = REFUTAR
-Y Asesor.justificación ≠ vacío
-ENTONCES
-  - Estado = REFUTADO
-  - Derivar a SUPERVISOR
-  - Guardar justificación
-  - Notificar Supervisor
-FIN SI
-```
-
-#### 3️⃣ **Supervisor Aprueba Refutación**
-```
-SI Supervisor.acción = PROCEDE
-ENTONCES
-  - Estado = REFUTACIÓN_APROBADA
-  - Derivar a LÍDER_CALIDAD
-  - Guardar observaciones del supervisor
-  - Notificar Líder para validación
-FIN SI
-```
-
-#### 4️⃣ **Supervisor Rechaza Refutación**
-```
-SI Supervisor.acción = NO_PROCEDE
-ENTONCES
-  - Estado = REFUTACIÓN_RECHAZADA
-  - Retornar a ASESOR
-  - Incluir motivos de rechazo
-  - Asesor debe replantearse
-FIN SI
-```
-
-#### 5️⃣ **Líder Valida**
-```
-SI Líder.acción = VALIDAR
-ENTONCES
-  - Estado = VALIDADO
-  - Fecha Finalización = HOY
-  - Guardar validación
-  - FIN PROCESO ✅
-FIN SI
-```
-
-#### 6️⃣ **Líder Rechaza Validación**
-```
-SI Líder.acción = RECHAZAR
-ENTONCES
-  - Estado = RECHAZADO
-  - Retornar a ASESOR
-  - Motivo: Requiere replanteamiento
-  - Ciclo inicia nuevamente
-FIN SI
-```
+| **VALIDADO** | Líder valida decisión | ✅ Proceso finalizado |
+| **RECHAZADO** | Líder rechaza validación | Retornar a Asesor (nuevo ciclo) |
 
 ---
 
 ## 📊 Módulos del Sistema
 
-### **1. Módulo de Monitoreo**
+### **Módulo de Monitoreo**
+Gestión completa del ciclo de monitoreo:
 - Crear nuevos monitoreos
-- Registrar hallazgos
+- Registrar hallazgos con severidad
 - Documentar observaciones
-- Adjuntar evidencia
-- Historial de monitoreos
+- Adjuntar evidencia (archivos)
+- Historial completo de cambios
 
-**Funciones:**
-- `crearMonitoreo(datos)` - Crear nuevo monitoreo
-- `guardarHallazgos(monitoreoId, hallazgos)` - Registrar hallazgos
-- `obtenerMonitoreos(filtros)` - Listar monitoreos
+**Funciones API:**
+- `POST /api/monitoreos` - Crear monitoreo
+- `GET /api/monitoreos` - Listar monitoreos
+- `GET /api/monitoreos/:id` - Obtener detalles
+- `PUT /api/monitoreos/:id` - Actualizar monitoreo
 
-### **2. Módulo de Evaluación**
-- Revisar monitoreos
-- Evaluar hallazgos
-- Aceptar/Refutar con justificación
-- Comentarios y observaciones
+### **Módulo de Evaluación**
+Revisión y evaluación de monitoreos:
+- Revisar hallazgos
+- Aceptar con confirmación
+- Refutar con justificación detallada
+- Agregar comentarios y observaciones
 
-**Funciones:**
-- `revisarMonitoreo(monitoreoId)` - Obtener detalles
-- `aceptarHallazgos(monitoreoId)` - Aceptar
-- `refutarHallazgos(monitoreoId, justificación)` - Refutar
+**Funciones API:**
+- `GET /api/monitoreos?estado=EN_REVISIÓN_ASESOR` - Listar asignados
+- `PUT /api/monitoreos/:id/aceptar` - Aceptar hallazgos
+- `PUT /api/monitoreos/:id/refutar` - Refutar con justificación
 
-### **3. Módulo de Supervisión**
-- Recibir refutaciones
-- Evaluar procedencia
-- Aprobar/Rechazar con justificación
-- Derivar a líder si procede
+### **Módulo de Supervisión**
+Evaluación de refutaciones:
+- Recibir refutaciones del Asesor
+- Evaluar procedencia de refutaciones
+- Aprobar o rechazar con motivo documentado
+- Derivar a Líder si procede
 
-**Funciones:**
-- `obtenerRefutaciones()` - Listar refutaciones
-- `aprobarRefutacion(refutacionId)` - Aprobar
-- `rechazarRefutacion(refutacionId, motivo)` - Rechazar
+**Funciones API:**
+- `GET /api/refutaciones` - Listar refutaciones pendientes
+- `PUT /api/monitoreos/:id/supervisor-aprobar` - Aprobar refutación
+- `PUT /api/monitoreos/:id/supervisor-rechazar` - Rechazar refutación
 
-### **4. Módulo de Validación**
-- Recibir validaciones del supervisor
-- Realizar validación final
-- Generar certificados
-- Archivar procesos
+### **Módulo de Validación**
+Validación final y cierre:
+- Recibir validaciones pendientes
+- Realizar validación final del proceso
+- Generar certificados de cierre
+- Archivar procesos completados
 
-**Funciones:**
-- `obtenerValidaciones()` - Listar validaciones pendientes
-- `validarProceso(monitoreoId)` - Validar
-- `generarCertificado(monitoreoId)` - Generar certificado
+**Funciones API:**
+- `GET /api/validaciones` - Listar validaciones pendientes
+- `PUT /api/monitoreos/:id/validar` - Validar proceso
+- `GET /api/monitoreos/:id/certificado` - Generar certificado
 
-### **5. Módulo de Reportes**
-- Generar reportes por rol
+### **Módulo de Reportes**
+Análisis e inteligencia de negocio:
+- Reportes personalizados por rol
 - Estadísticas de procesos
-- Análisis de tendencias
-- Exportar datos
+- Análisis de tendencias mensuales
+- Exportación en múltiples formatos
 
-**Funciones:**
-- `generarReporte(filtros)` - Generar reporte
-- `obtenerEstadísticas(período)` - Estadísticas
-- `exportarDatos(formato)` - Exportar
+**Funciones API:**
+- `GET /api/reportes` - Generar reporte
+- `GET /api/estadísticas` - Obtener estadísticas
+- `GET /api/exportar` - Exportar datos
 
-### **6. Módulo de Notificaciones**
-- Alertas por cambio de estado
-- Reminders de acciones pendientes
-- Notificaciones a roles específicos
-
-**Funciones:**
-- `enviarNotificación(usuario, mensaje)` - Enviar notificación
-- `crearAlerta(tipo, datos)` - Crear alerta
+### **Módulo de Notificaciones**
+Sistema de alertas en tiempo real:
+- Alertas de cambio de estado
+- Recordatorios de acciones pendientes
+- Notificaciones personalizadas por rol
+- Integraciones con WebSockets
 
 ---
 
-## 📋 Atributos de Monitoreo
+## 📋 Estructura de Datos
 
+### Monitoreo (Ejemplo)
 ```json
 {
   "id": "MON-2026-001",
@@ -257,7 +178,7 @@ FIN SI
     "nombre": "Juan Pérez",
     "rol": "LÍDER_CALIDAD"
   },
-  "proceso": "Producción",
+  "proceso": "Producción - Línea A",
   "fecha_creación": "2026-07-03",
   "estado": "EN_REVISIÓN_ASESOR",
   "hallazgos": [
@@ -278,31 +199,11 @@ FIN SI
     "fecha": "2026-07-03",
     "justificación": "El hallazgo no es válido según procedimiento XYZ"
   },
-  "supervisor": {
-    "id": "USR-003",
-    "nombre": "Carlos López",
-    "rol": "SUPERVISOR"
-  },
-  "evaluación_supervisor": {
-    "acción": "PROCEDE",
-    "fecha": "2026-07-03",
-    "motivo": "Se confirma la refutación del asesor"
-  },
-  "líder_validación": {
-    "id": "USR-001",
-    "validación": "VALIDADO",
-    "fecha": "2026-07-03"
-  },
   "historial": [
     {
       "fecha": "2026-07-03 10:00",
       "acción": "CREADO",
       "usuario": "Juan Pérez"
-    },
-    {
-      "fecha": "2026-07-03 11:30",
-      "acción": "REFUTADO",
-      "usuario": "María García"
     }
   ]
 }
@@ -310,125 +211,101 @@ FIN SI
 
 ---
 
-## 🚀 Instalación y Uso
+## 🚀 Inicio Rápido
 
-### **Requisitos Previos**
-- Node.js v14+
-- Base de datos (MongoDB/PostgreSQL)
+### Requisitos Previos
+- Node.js v14 o superior
+- Base de datos: MongoDB o PostgreSQL
 - npm o yarn
+- Git
 
-### **Instalación**
+### Instalación
+
 ```bash
-# Clonar repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/jeferson6329/gestion_calidad.git
-
-# Instalar dependencias
 cd gestion_calidad
+
+# 2. Instalar dependencias
 npm install
 
-# Configurar variables de entorno
+# 3. Configurar variables de entorno
 cp .env.example .env
+# Editar .env con tus configuraciones
 
-# Ejecutar base de datos
+# 4. Configurar base de datos
 npm run db:setup
 
-# Iniciar servidor
+# 5. Iniciar servidor de desarrollo
 npm start
 ```
 
-### **Uso Básico**
+El servidor estará disponible en `http://localhost:3000`
 
-#### Para Líder de Calidad:
+---
+
+## 📚 Ejemplos de Uso
+
+### Para Líder de Calidad: Crear Monitoreo
 ```bash
-# Crear monitoreo
-POST /api/monitoreos
-{
-  "proceso": "Producción",
-  "hallazgos": [...]
-}
-
-# Ver mis monitoreos
-GET /api/monitoreos?estado=CREADO
+curl -X POST http://localhost:3000/api/monitoreos \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "proceso": "Control de Calidad - Línea A",
+    "hallazgos": [
+      {
+        "descripción": "Temperatura fuera de rango",
+        "severidad": "ALTA",
+        "observación": "Se registró 5°C por debajo del límite"
+      }
+    ]
+  }'
 ```
 
-#### Para Asesor:
+### Para Asesor: Refutar Hallazgos
 ```bash
-# Ver monitoreos asignados
-GET /api/monitoreos?estado=EN_REVISIÓN_ASESOR
+curl -X PUT http://localhost:3000/api/monitoreos/MON-001/refutar \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "justificación": "El sensor estaba mal calibrado. Temperatura es correcta según lectura manual."
+  }'
+```
 
-# Refutar un monitoreo
-PUT /api/monitoreos/{id}/refutar
-{
-  "justificación": "..."
-}
+### Para Supervisor: Aprobar Refutación
+```bash
+curl -X PUT http://localhost:3000/api/monitoreos/MON-001/supervisor-aprobar \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "observaciones": "Se confirma la refutación. Requiere recalibración de sensor."
+  }'
+```
+
+### Para Líder: Validar Proceso
+```bash
+curl -X PUT http://localhost:3000/api/monitoreos/MON-001/validar \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "observaciones_finales": "Proceso validado. Se programó recalibración de sensor."
+  }'
 ```
 
 ---
 
-## 🔍 Ejemplo de Flujo Completo
-
-### **Paso 1: Líder crea monitoreo**
-```json
-POST /api/monitoreos
-{
-  "proceso": "Control de Calidad - Línea A",
-  "hallazgos": [
-    {
-      "descripción": "Temperatura fuera de rango",
-      "severidad": "ALTA",
-      "observación": "Se registró 5°C por debajo del límite"
-    }
-  ]
-}
-→ Estado: CREADO → EN_REVISIÓN_ASESOR
-```
-
-### **Paso 2: Asesor refuta**
-```json
-PUT /api/monitoreos/MON-001/refutar
-{
-  "justificación": "El sensor estaba mal calibrado. Temperatura es correcta según lectura manual."
-}
-→ Estado: REFUTADO → EN_REVISIÓN_SUPERVISOR
-→ Notificación: Supervisor recibe refutación
-```
-
-### **Paso 3: Supervisor aprueba**
-```json
-PUT /api/monitoreos/MON-001/supervisor-aprobar
-{
-  "observaciones": "Se confirma la refutación. Requiere recalibración de sensor."
-}
-→ Estado: REFUTACIÓN_APROBADA → EN_VALIDACIÓN_LÍDER
-→ Notificación: Líder recibe validación pendiente
-```
-
-### **Paso 4: Líder valida**
-```json
-PUT /api/monitoreos/MON-001/validar
-{
-  "observaciones_finales": "Proceso validado. Se programó recalibración de sensor."
-}
-→ Estado: VALIDADO ✅
-→ Fecha Finalización: 2026-07-03
-→ Proceso FINALIZADO
-```
-
----
-
-## 📊 Reportes y Análisis
-
-### **Reportes Disponibles**
+## 📊 Reportes Disponibles
 
 1. **Reporte de Monitoreos por Líder**
-   - Cantidad de monitoreos
-   - Hallazgos por severidad
-   - Tasa de aceptación
+   - Cantidad de monitoreos realizados
+   - Hallazgos por nivel de severidad
+   - Tasa de aceptación/refutación
 
-2. **Reporte de Evaluaciones**
+2. **Reporte de Evaluaciones (Asesor)**
    - Monitoreos aceptados
    - Monitoreos refutados
-   - Justificaciones más comunes
+   - Justificaciones más frecuentes
 
 3. **Reporte de Supervisor**
    - Refutaciones aprobadas
@@ -436,69 +313,129 @@ PUT /api/monitoreos/MON-001/validar
    - Tiempo promedio de decisión
 
 4. **Reporte Ejecutivo**
-   - KPIs generales
+   - KPIs generales del sistema
    - Tendencias mensuales
-   - Procesos críticos
+   - Procesos críticos identificados
+   - Métricas de conformidad
 
 ---
 
-## 🔒 Seguridad y Permisos
+## 🔒 Seguridad y Control de Acceso
 
-### **Control de Acceso**
+### Permisos por Rol
 
+**LÍDER_CALIDAD**
 ```
-LÍDER_CALIDAD:
-  ✓ Crear monitoreos
-  ✓ Ver sus monitoreos
-  ✓ Validar decisiones del supervisor
-  ✗ Aceptar/Refutar
+✓ Crear monitoreos
+✓ Ver sus monitoreos
+✓ Validar decisiones del supervisor
+✓ Acceder a reportes personales
+✗ Aceptar/Refutar
+```
 
-ASESOR:
-  ✓ Ver monitoreos asignados
-  ✓ Aceptar/Refutar hallazgos
-  ✓ Agregar comentarios
-  ✗ Crear monitoreos
-  ✗ Validar decisiones
+**ASESOR**
+```
+✓ Ver monitoreos asignados
+✓ Aceptar/Refutar hallazgos
+✓ Agregar comentarios
+✓ Adjuntar evidencia adicional
+✗ Crear monitoreos
+✗ Validar decisiones
+```
 
-SUPERVISOR:
-  ✓ Ver refutaciones
-  ✓ Aprobar/Rechazar refutaciones
-  ✓ Derivar a líder
-  ✗ Crear o editar monitoreos
-  ✗ Realizar validación final
+**SUPERVISOR**
+```
+✓ Ver refutaciones pendientes
+✓ Aprobar/Rechazar refutaciones
+✓ Derivar a líder
+✓ Acceder a reportes de supervisión
+✗ Crear o editar monitoreos
+✗ Realizar validación final
+```
 
-ADMINISTRADOR:
-  ✓ Acceso total
-  ✓ Gestionar usuarios
-  ✓ Configurar sistema
+**ADMINISTRADOR**
+```
+✓ Acceso total al sistema
+✓ Gestionar usuarios y roles
+✓ Configurar parámetros del sistema
+✓ Ver todos los reportes
+✓ Exportar datos
 ```
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Stack Tecnológico
 
-- **Backend**: Node.js / Express
+- **Backend**: Node.js + Express
 - **Base de Datos**: MongoDB / PostgreSQL
 - **Frontend**: React / Vue.js
 - **Autenticación**: JWT
-- **Notificaciones**: Socket.io / Webhooks
+- **Comunicación en Tiempo Real**: Socket.io / WebSockets
 - **Reportes**: ReportLab / jsPDF
+- **Validación**: Joi / Yup
 
 ---
 
-## 📞 Soporte y Contacto
+## 📁 Estructura del Proyecto
 
-Para reportar problemas o sugerencias:
-- Email: support@gestioncalidad.com
-- Issues: https://github.com/jeferson6329/gestion_calidad/issues
+```
+gestion_calidad/
+├── README.md                 # Este archivo
+├── package.json              # Dependencias del proyecto
+├── .env.example              # Variables de entorno ejemplo
+├── src/
+│   ├── config/              # Configuración (DB, Auth, etc)
+│   ├── models/              # Esquemas/Modelos de datos
+│   ├── controllers/         # Lógica de negocio
+│   ├── routes/              # Definición de rutas API
+│   ├── middleware/          # Middleware (Auth, Validación)
+│   ├── services/            # Servicios (Notificaciones, Reportes)
+│   └── utils/               # Utilidades y helpers
+├── tests/                   # Suite de pruebas
+├── docs/                    # Documentación adicional
+└── scripts/                 # Scripts de utilidad
+```
 
 ---
 
-## 📝 Licencia
+## 🤝 Contribuir
 
-Proyecto de código abierto bajo licencia MIT.
+Las contribuciones son bienvenidas. Para contribuir:
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+---
+
+## 📞 Soporte
+
+Para reportar problemas, sugerencias o preguntas:
+
+- **Issues**: [GitHub Issues](https://github.com/jeferson6329/gestion_calidad/issues)
+- **Email**: support@gestioncalidad.com
+- **Documentación**: Consulta la carpeta `/docs` para guías detalladas
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+## 🔄 Historial de Cambios
+
+### v1.0.0 (2026-07-03)
+- ✨ Versión inicial del sistema
+- 🎯 Implementación completa del flujo de monitoreo
+- 👥 Sistema de roles y permisos
+- 📊 Módulo de reportes básico
+- 🔐 Autenticación JWT
 
 ---
 
 **Última actualización**: 2026-07-03  
-**Versión**: 1.0.0
+**Mantenedor**: [@jeferson6329](https://github.com/jeferson6329)
